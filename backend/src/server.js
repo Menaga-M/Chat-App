@@ -1,8 +1,19 @@
-// const express = require("express");
+import dns from "dns";
+dns.setServers(['8.8.8.8', '1.1.1.1']);
+
 import express from "express";
 import "dotenv/config";
+import User from "./models/user.model.js";
+import { connectDB } from "./lib/db.js";
 
 const app = express();
 const PORT = process.env.PORT
 
-app.listen(PORT, () => console.log("Server is running in port:",PORT));
+app.get("/health",(req,res) => {
+    res.status(200).json({ok:true});
+});
+
+app.listen(PORT, () => {
+    connectDB();
+    console.log("Server is running in port:",PORT);
+});
