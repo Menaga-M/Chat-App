@@ -25,7 +25,7 @@ app.use(cors({
 }));
 app.use(clerkMiddleware())
 
-app.get("/",(req,res) => {
+app.get("/health",(req,res) => {
     res.status(200).json({ok:true});
 });
 
